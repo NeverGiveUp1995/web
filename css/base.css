@@ -1,0 +1,31 @@
+
+body, html, h1, h2, h3, h4, h5, h6, p, ul {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link, a:visited, a:hover, a:active {
+    background: none;
+}
+
+
+li {
+    list-style: none;
+}
+
+/*清除浮动*/
+.clearFix:after, .clearFix:before {
+    display: table;
+    content: "";
+    clear: both;
+}
+
+
+.parseDiv img {
+    min-width: 60vw !important;
+    max-width: 90vw !important;
+}

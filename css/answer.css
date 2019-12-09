@@ -1,0 +1,68 @@
+#wrap {
+    padding: 15px;
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+.topic-content {
+    margin: 20px 0;
+    color: #666666;
+    font-size: 14px;
+}
+
+
+/*设置题干图片最大宽度只能是屏幕的80%*/
+.topicContentImg img {
+    max-width: 80vw;
+}
+
+
+/*选项未选中状态的样式*/
+ul.options li {
+    display: flex;
+    padding: 10px 0;
+    color: #666666;
+    padding-left: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 1px #dddddd;
+    margin: 10px 0;
+}
+
+/*设置选项下面的图片最大宽度只有屏幕的70%*/
+ul.options li.option .optionImg img {
+    max-width: 75vw;
+}
+
+/*选项已选中状态的样式*/
+ul.options li.option.selected {
+    color: #4BA1F9;
+}
+
+ul.options li.option > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+ul.options li.option > div > div:nth-child(1) span {
+    width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    border: 1px solid #4BA1F9;
+    color: #4BA1F9;
+    margin-right: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*选项前面ABCD被选中时的颜色*/
+ul.options li.option.selected > div > div:nth-child(1) span {
+    border: 1px solid white;
+    background: #4BA1F9;
+    color: white;
+}
+
+
+
