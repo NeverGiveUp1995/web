@@ -30,9 +30,10 @@
          * 根据题目选项数据，渲染选项
          * @param katex :katex对象
          * @param options:选项数据
+         * @param baseUrl ：显示的图片基本路径
          * @returns {string} html字符串
          */
-        window.renderOption = function (katex, options) {
+        window.renderOption = function (katex, options, baseUrl) {
             if (arguments.length < 2) {
                 console.error("缺少参数", Error().stack)
             }
@@ -56,7 +57,7 @@
          */
         window.renderImg = function (basePath, imgSrc) {
             if (basePath && imgSrc) {
-                return "<div><img alt='' src=" + basePath + imgSrc + "+/> </div>"
+                return "<div><img alt='' src=" + (basePath + imgSrc) + "></div>"
             }
             return '<div class="imgArea"></div>'
         }
@@ -65,13 +66,10 @@
         /**
          * 将LaTeX代码转换为html字符串，不考虑存在公式有嵌套的情况：$$xxx$xxx$xxxx$$ 或者 $$$xx$xxx$$
          * @param core:代码
-         * @param isInline
          * @param katex :解析需要的katex库暴露的对象
          * @returns {string}
          */
         window.parseToHtml = function (katex, core) {
-            debugger
-            console.log("parseToHtml")
             var newCore = core
             if (arguments.length < 2) {
                 console.log("缺少参数", Error().stack)
@@ -125,31 +123,32 @@
                         }
                     }
                 }
-            }
-            /*遍历存放公式位置标记的对象数组，然后将公式所在位置解析并替换
-                注意：由于replace（）方法会影响原字符串，所以需要从最后一项开始往前遍历
 
-             */
-            for (var i = latexIndexArr.length - 1; i >= 0; i--) {
-                var latexFlag = latexIndexArr[i]
-                //用于存放带$符号的公式
-                var $latexContent = ''
-                //用于去掉$后解析
-                var latexContent = ''
-                if (latexFlag.isBlock) {
-                    $latexContent = latexContent = core.substr(latexFlag.startIndex, latexFlag.endIndex - latexFlag.startIndex + 2)
-                } else {
-                    $latexContent = latexContent = core.substr(latexFlag.startIndex, latexFlag.endIndex - latexFlag.startIndex + 1)
+                /*遍历存放公式位置标记的对象数组，然后将公式所在位置解析并替换
+         注意：由于replace（）方法会影响原字符串，所以需要从最后一项开始往前遍历
+
+      */
+                for (var i = latexIndexArr.length - 1; i >= 0; i--) {
+                    var latexFlag = latexIndexArr[i]
+                    //用于存放带$符号的公式
+                    var $latexContent = ''
+                    //用于去掉$后解析
+                    var latexContent = ''
+                    if (latexFlag.isBlock) {
+                        $latexContent = latexContent = core.substr(latexFlag.startIndex, latexFlag.endIndex - latexFlag.startIndex + 2)
+                    } else {
+                        $latexContent = latexContent = core.substr(latexFlag.startIndex, latexFlag.endIndex - latexFlag.startIndex + 1)
+                    }
+                    //将公式解析，并将返回结果存入变量renderResult
+                    var renderResult = katex.renderToString(latexContent.replace(/\$/g, ""), {
+                        throwOnError: false,
+                        displayMode: latexFlag.isBlock,
+                    })
+                    //替换原公式
+                    newCore = newCore.replace($latexContent, renderResult)
                 }
-                //将公式解析，并将返回结果存入变量renderResult
-                var renderResult = katex.renderToString(latexContent.replace(/\$/g, ""), {
-                    throwOnError: false,
-                    displayMode: latexFlag.isBlock,
-                })
-                //替换原公式
-                newCore = newCore.replace($latexContent, renderResult)
             }
-            resultHtml = resultHtml + newCore + "</span>"
+            resultHtml = resultHtml + (newCore ? newCore : "") + "</span>"
             return marked(resultHtml)
         }
     }

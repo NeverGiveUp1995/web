@@ -1,5 +1,4 @@
 window.onload = function () {
-
     var topic = getDataFromStorage(TOPIC_DETAIL_DATA)
     var topicWrapDom = document.getElementById('topicWrap')
     var imgBasePath = 'http://res.daily.gogoquestionbank.jyjy.cn/'

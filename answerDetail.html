@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scal=1.0,user=scalable=no,minimal-ui">
+    <!--    引入katex样式-->
+    <link rel="stylesheet" href="lib/katex/katex.css">
+    <link rel="stylesheet" href="css/base.css">
+    <!--    <link rel="stylesheet" href="css/topicDetail.css">-->
+    <link rel="stylesheet" href="css/answerDetail.css">
+
+    <!--    引入bootstrap以及bootstrap滑块的組件-->
+    <link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/bootstrap-slider/9.4.1/css/bootstrap-slider.css" rel="stylesheet">
+
+    <script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap-slider/9.4.1/bootstrap-slider.min.js"></script>
+
+    <title>Title</title>
+</head>
+<body>
+<div id="answerDetailWrap">
+    <!--   题干-->
+    <div id="topicContentWrap"></div>
+    <!--    学生作答情况-->
+    <div id="stuAnswer"></div>
+    <!--    正确答案-->
+    <div id="answer"></div>
+    <!--    评分-->
+    <div id="score"></div>
+    <!--    解析-->
+    <div id="analysis"></div>
+    <!--    知识点-->
+    <div id="knowledge"></div>
+    <!--    滑块组件-->
+    <div id="slider"></div>
+</div>
+</body>
+<script src="lib/markdown/marked.js"></script>
+<script src="lib/katex/katex.js"></script>
+<script src="js/util.js"></script>
+<script src="js/const.js"></script>
+<script src="js/answerDetail.js"></script>
+<script type="application/javascript">
+    // window.onload = function () {
+    //     var topic = {
+    //         "id": 4088,
+    //         "contentPng": null,
+    //         "content": "函数 $f(x)=x\\cdot {{\\text{e}}^{|\\sin x|}}$ 的图象大致为（    ）",
+    //         "answerPng": null,
+    //         "answer": "A",
+    //         "analysisPng": null,
+    //         "analysis": "【解析】依题意, $x\\in R$ , $f(-x)=-x\\cdot {{\\text{e}}^{|\\sin (-x)|}}=-x\\cdot {{\\text{e}}^{|\\sin x|}}=-f(x)$ ,故函数$f\\left( x \\right)$为奇函数,图象关于原点对称,排除C；而 $f(\\pi )=\\pi \\cdot {{\\text{e}}^{|\\sin \\pi |}}=\\pi <5$ ,排除B；而 $f\\left( \\frac{3\\pi }{2} \\right)=\\frac{3\\pi }{2}\\cdot {{\\text{e}}^{\\left| \\sin \\frac{3\\pi }{2} \\right|}}=\\frac{3\\pi }{2}\\cdot \\text{e}$ , $f(2\\pi )=2\\pi \\cdot {{\\text{e}}^{|\\sin \\pi |}}=2\\pi$ ,故 $f\\left( \\frac{3\\pi }{2} \\right)>f(2\\pi )$ ,排除D,故选:A．",
+    //         "category": 1,
+    //         "subjectId": 2,
+    //         "gradeId": 15,
+    //         "creatorId": 14,
+    //         "createTime": 1574998732000,
+    //         "yearId": 2019,
+    //         "schoolId": 1,
+    //         "difficulty": 0.65,
+    //         "cognLevelId": null,
+    //         "keyAbilityId": null,
+    //         "keyCompId": null,
+    //         "type": 3,
+    //         "jobId": null,
+    //         "rangeId": null,
+    //         "updateTime": 1574998732000,
+    //         "oldQuestionId": null,
+    //         "topicCode": null,
+    //         "knowName": '指数幂是指数,幂具体概念指数幂,具体概念,指数幂,具体概',
+    //         "knowIds": null,
+    //         "optionList": [
+    //             {
+    //                 "id": 17103,
+    //                 "questionId": 4088,
+    //                 "code": "A.",
+    //                 "content": "hdshaifhsdifhiahi",
+    //                 "contentPng": "9e6b0e3dcdcd4ad08437f555b751452e.png",
+    //                 "optionCode": "A",
+    //                 "topicCode": null
+    //             }, {
+    //                 "id": 17104,
+    //                 "questionId": 4088,
+    //                 "code": "B.",
+    //                 "content": null,
+    //                 "contentPng": "fa840c3c144d4c59af2bf89b41fb7bb8.png",
+    //                 "optionCode": "B",
+    //                 "topicCode": null
+    //             }, {
+    //                 "id": 17105,
+    //                 "questionId": 4088,
+    //                 "code": "C.",
+    //                 "content": "向蛋白质溶液中加入O4溶液均有沉淀析出，再加入蒸馏水沉淀又重新溶解",
+    //                 "contentPng": "2addff994c684df887c7c5a00b11face.png",
+    //                 "optionCode": "C",
+    //                 "topicCode": null
+    //             }, {
+    //                 "id": 17106,
+    //                 "questionId": 4088,
+    //                 "code": "D.",
+    //                 "content": null,
+    //                 "contentPng": "3f172d3d6ae34a7591e29901dfc01b0a.png",
+    //                 "optionCode": "D",
+    //                 "topicCode": null
+    //             }
+    //         ],
+    //         "serialCode": null,
+    //         "difficultyInt": null,
+    //         "collect": null,
+    //         "notes": null,
+    //         "massage": null,
+    //         "massageIds": null,
+    //         "isErro": null,
+    //         "score": 5,
+    //         "tempId": null,
+    //         "taskId": 42,
+    //         "paperId": null,
+    //         "studentAnswer": "C",
+    //         "isTrue": 0,
+    //         "isObjective": 0,
+    //         "useNumber": null
+    //     }
+    //     renderTopic(topic, true)
+    // }
+</script>
+</html>

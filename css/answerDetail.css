@@ -1,0 +1,158 @@
+body, html {
+    overflow-x: hidden;
+}
+
+#answerDetailWrap {
+    padding: 10px;
+
+}
+
+#stuAnswer,
+#answer,
+#score,
+#knowledge {
+    color: #999999;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+#stuAnswer span,
+#answer span,
+#knowledge span {
+    color: #666;
+    font-weight: bold;
+}
+
+#score > div {
+    padding: 15px 10px;
+    box-shadow: 0 0 6px #aaa;
+    border-radius: 4px;
+}
+
+#score span {
+    color: #4BA1F9;
+}
+
+.option {
+    margin: 15px;
+}
+
+.option img {
+    margin-left: 20px;
+}
+
+.optionContent {
+    color: #4BA1F9;
+}
+
+.optionContent > div {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+}
+
+/*选项前面的abcd*/
+.optionContent .code {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #4BA1F9;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.optionContent .optionText {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.optionContent .optionText {
+    word-wrap: break-word
+}
+
+.optionContent .code.error {
+    border: 1px solid #CA2424;
+    background: #CA2424;
+    color: white;
+}
+
+.optionContent .code.bingo {
+    border: 1px solid #4BA1F9;
+    background: #4BA1F9;
+    color: white;
+}
+
+/*用户答错的时候的选项文本*/
+.optionText.error {
+    color: #CA2424;
+}
+
+/*用户答对的时候的选项文本*/
+.optionText.bingo {
+    color: #4BA1F9;
+}
+
+
+#analysis {
+    color: #999;
+}
+
+#analysis > .title {
+    font-size: 14px;
+    color: #4BA1F9;
+}
+
+#analysis > .content {
+    font-size: 12px;
+
+}
+
+#knowledge .knowledge {
+    margin: 25px 0;
+}
+
+#knowledge .knowLedgeItemWrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 15px;
+}
+
+#knowledge .knowledgeLabel {
+    color: #4BA1F9;
+    margin-bottom: 5px;
+}
+
+#knowledge .knowLedgeItem {
+    padding: 3px 15px;
+    min-width: 60px;
+    text-align: center;
+    height: 20px;
+    line-height: 20px;
+    background: #4BA1F9;
+    color: white;
+    font-size: 12px;
+    border-radius: 15px;
+    margin: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+#knowledge .knowLedgeItem span {
+    color: white;
+}
+
+#ex1Slider {
+    width: 100px;
+    position: fixed;
+    bottom: 150px;
+    right: 30px;
+    /*transform: rotate(90deg);*/
+}
+
+/*滑块的样式*/
+#ex1Slider .slider-selection {
+    background: #BABABA;
+}

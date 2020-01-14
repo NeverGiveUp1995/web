@@ -1,5 +1,5 @@
 (function (window) {
-    var renderOptions = function (options) {
+    var renderOptions = function (options, baseUrl) {
         var optionsStr = '<ul class="options">'
         if (options && Array.isArray(options)) {
             options.forEach(function (option, index) {
@@ -9,7 +9,7 @@
                     '                 <div><span>' + ((option.code + '').trim().charAt(0)) + '</span></div>\n' +
                     '                  <div>' + parseToHtml(katex, option.content) + '</div>\n' +
                     '            </div>' +
-                    '            <div class="optionImg"> ' + renderImg('http://res.daily.gogoquestionbank.jyjy.cn/', option.contentPng) + ' </div>' +
+                    '            <div class="optionImg"> ' + renderImg(baseUrl === undefined ? 'http://res.daily.gogoquestionbank.jyjy.cn/' : baseUrl, option.contentPng) + ' </div>' +
                     '        </li>\n'
             })
         }
@@ -23,7 +23,6 @@
      * @param basePath：图片的基本路径
      */
     window.renderTopic = function (topic, imgBasePath) {
-        console.log('renderTopic')
         if (!imgBasePath) {
             imgBasePath = 'http://res.daily.gogoquestionbank.jyjy.cn/'
         }
@@ -38,7 +37,7 @@
                     topic.content ? parseToHtml(katex, topic.content) : '暂无题干信息'
                 ) + '</div>\n' +
                 '    <div class="topicContentImg"> ' + renderImg(imgBasePath, topic.contentPng) + ' </div>' +
-                '    ' + (renderOptions(topic.optionList)) + '' +
+                '    ' + (renderOptions(topic.optionList,imgBasePath)) + '' +
                 '    </div>'
         } else {
             wrapDom.innerHTML = '<div class="no-data">暂无题目数据</div>'
@@ -47,7 +46,6 @@
         var optionsDom = document.querySelectorAll('ul.options li')
         //文档中获取所有的选项，然后遍历选项并给每一个选项添加监听
         Array.prototype.slice.call(optionsDom).forEach(function (option, index) {
-
             option.onclick = function () {
                 //多选版本【勿删】
                 // var liDom = document.querySelector('ul.options li.option:nth-child(' + (index + 1) + ')')
@@ -95,7 +93,6 @@
                     }
                 })
             }
-
         })
     }
 })(window)
